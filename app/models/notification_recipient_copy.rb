@@ -1,4 +1,3 @@
-require "lib/channels/email"
 require "lib/channels/in_app_notification_center"
 
 class NotificationRecipientCopy < ApplicationRecord
@@ -16,6 +15,6 @@ class NotificationRecipientCopy < ApplicationRecord
   private
 
   def channels
-    [Channels::Email, Channels::InAppNotificationCenter]
+    [InAppNotificationCenter]
   end
 end
