@@ -1,4 +1,4 @@
 class NotificationRecipientCopy < ApplicationRecord
-  belongs_to :recipient
-  belongs_to :email
+  belongs_to :user
+  belongs_to :recipient, :class => "User"
 end
