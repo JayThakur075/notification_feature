@@ -1,8 +1,5 @@
-require "lib/channels/in_app_notification_center"
-
 class NotificationRecipientCopy < ApplicationRecord
-  belongs_to :user
-  belongs_to :recipient, :class => "User"
+  belongs_to :recipient, class_name: "User"
 
   after_create :deliver
 

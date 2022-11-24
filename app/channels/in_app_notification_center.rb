@@ -10,18 +10,18 @@ class InAppNotificationCenter < ApplicationCable::Channel
         name: event_name,
         data: {
           notification: {
-            id: notification_recipient_copy.id
+            id: @notification_recipient_copy.id
           }
         }
       }
     }
-    ably.publish(event_name, event_data)
+    ably_channel.publish(event_name, event_data)
   end
 
   private
 
   def ably_channel
-    "users/#{recipient.id}"
+    ably.channel("users/#{recipient.id}")
   end
 
   def ably
@@ -29,6 +29,6 @@ class InAppNotificationCenter < ApplicationCable::Channel
   end
 
   def recipient
-    notification_recipient_copy.recipient
+    @notification_recipient_copy.recipient
   end
 end

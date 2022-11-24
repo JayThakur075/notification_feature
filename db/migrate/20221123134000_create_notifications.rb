@@ -5,6 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[7.0]
       t.text :text
       t.string :on_click_url
       t.datetime :sent_at
+      t.references :project
 
       t.timestamps
     end

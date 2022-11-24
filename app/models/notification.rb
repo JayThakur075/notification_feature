@@ -1,7 +1,7 @@
 class Notification < ApplicationRecord
   belongs_to :project
 
-  has_many :recipient_copies, class: "NotificationRecipientCopy"
+  has_many :recipient_copies, class_name: "NotificationRecipientCopy"
 
   validates_presence_of :title
   validates_presence_of :text
@@ -13,21 +13,21 @@ class Notification < ApplicationRecord
   attr_accessor :recipient_emails
 
   def associate_recipients
+    @recipients = []
     recipient_emails.each do |recipient_email|
       recipient = User.where(email: recipient_email).first
       unless recipient
-        recipient = User.create(recipient_email: recipient_email).
+        recipient = User.create(email: recipient_email)
       end
 
-      recipients << recipient
+      @recipients << recipient
     end
   end
 
   def deliver
-    recipients.each do |recipient|
-      recipient_notification_copy = RecipientNotificationCopy.create(
-        notification: notification
-        recipient: recipient,
+    @recipients.each do |recipient|
+      recipient_notification_copy = NotificationRecipientCopy.create(
+        recipient: recipient
       )
     end
   end

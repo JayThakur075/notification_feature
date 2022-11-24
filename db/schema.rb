@@ -28,8 +28,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_135134) do
     t.text "text"
     t.string "on_click_url"
     t.datetime "sent_at"
+    t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_notifications_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
